@@ -1,0 +1,72 @@
+.demo-btn-margin .btn{margin-bottom:6px}
+
+.form-group.form-md-line-input {
+    position: relative;
+    margin: 0 0 35px 0;
+    padding-top: 20px; }
+.form-horizontal .form-group.form-md-line-input {
+    padding-top: 10px;
+    margin-bottom: 20px;
+    margin: 0 -15px 20px -15px; }
+.form-horizontal .form-group.form-md-line-input > label {
+    padding-top: 5px;
+    font-size: 14px;
+    color: #888888;
+    opacity: 1 ;
+    filter: alpha(opacity=100) ; }
+.form-group.form-md-line-input .form-control {
+    background: none;
+    border: 0;
+    border-bottom: 1px solid #c2cad8;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+    color: #b9b9b9;
+    box-shadow: none;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 17px; }
+.form-group.form-md-line-input.has-info .form-control {
+    border-bottom: 1px solid #b9b9b9;
+}
+.login-block h1 {
+    font-size: 22px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.login-block .hr-xs {
+    margin-top: -10px;
+    margin-bottom: 0px;
+}
+
+/* custom toggle style */
+
+.my-toggle {
+    background: transparent;
+    border: 0;
+    border-radius: 0.25em;
+    color: #888;
+    cursor: pointer;
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-right: 0.5em;
+    padding: 0.5em;
+    text-transform: uppercase;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
+  
+  .my-toggle:hover,
+  .my-toggle:focus {
+    background-color: #eee;
+    color: #555;
+    outline: transparent;
+  }
+
+  .hideShowPassword-toggle,
+.my-toggle {
+  z-index: 3;
+}

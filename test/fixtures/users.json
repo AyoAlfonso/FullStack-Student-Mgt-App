@@ -1,0 +1,34 @@
+[
+  {
+    "model": "User",
+    "data": {
+      "id": 1,
+      "name": "Jane Smith",
+      "email": "jsmith@school.org"
+    }
+  },
+  {
+    "model": "User",
+    "data": {
+      "id": 2,
+      "name": "Mary Smiet",
+      "email": "msmiet@school.org"
+    }
+  },
+  {
+    "model": "User",
+    "data": {
+      "id": 3,
+      "name": "Peter Stood",
+      "email": "pstood@school.org"
+    }
+  },
+  {
+    "model": "User",
+    "data": {
+      "id": 4,
+      "name": "Adrian Stirl",
+      "email": "astirl@school.org"
+    }
+  }
+]

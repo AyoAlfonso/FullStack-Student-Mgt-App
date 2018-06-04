@@ -1,0 +1,31 @@
+{
+  "env": {
+    "mocha": true,
+    "node": true
+  },
+  "globals": {
+    "connect": true
+  },
+  "plugins": [
+    "node",
+    "promise",
+    "security"
+  ],
+  "extends": [
+    "airbnb-base",
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "plugin:promise/recommended",
+    "plugin:security/recommended"
+  ],
+  "rules": {
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "ignore"
+    }],
+    "max-len": 0
+  }
+}

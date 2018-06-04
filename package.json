@@ -1,0 +1,69 @@
+{
+  "name": "ws-nodejs-re",
+  "version": "1.0.0",
+  "description": "work sample for nodejs developers",
+  "main": "./src/server/app.js",
+  "private": true,
+  "scripts": {
+    "apidoc": "$(npm bin)/apidoc  -f \".*\\.js$\" -i src/server/ -o doc/",
+    "dev": "DEBUG=ws-nodejs-re:* $(npm bin)/nodemon -L ./src/server/app.js",
+    "lint": "$(npm bin)/eslint src/server/ config/ test/",
+    "start": "node src/server/app.js",
+    "test": "NODE_ENV=test PORT=3333 $(npm bin)/mocha --exit --recursive -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Digication/ws-nodejs-re.git"
+  },
+  "author": "Digication",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Digication/ws-nodejs-re/issues"
+  },
+  "homepage": "https://github.com/Digication/ws-nodejs-re#readme",
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "joi": "^13.3.0",
+    "jsonwebtoken": "^8.2.2",
+    "morgan": "~1.9.0",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
+    "sequelize": "^4.32.1",
+    "shortid-36": "^0.1.2",
+    "sqlite3": "^4.0.0"
+  },
+  "devDependencies": {
+    "apidoc": "^0.17.6",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-security": "^1.4.0",
+    "mocha": "^4.1.0",
+    "nodemon": "^1.17.5",
+    "sequelize-fixtures": "^0.7.0"
+  },
+  "apidoc": {
+    "name": "roster-editor API Docs",
+    "version": "1.0.0",
+    "description": "Documentation for the API endpoints provided by roster-editor backend",
+    "title": "roster-editor API Docs",
+    "url": "https://roster-editor.digication.com"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "test/*",
+      "docs/*"
+    ],
+    "delay": "500"
+  }
+}

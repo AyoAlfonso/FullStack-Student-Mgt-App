@@ -1,0 +1,21 @@
+version: '2.1'
+services:
+  web:
+    build:
+      context: .
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    container_name: digi-ws-nodejs-re
+    command: 'npm run dev'
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://rostereditor@postgres/roster
+  postgres:
+    image: postgres:10.1-alpine
+    environment:
+      POSTGRES_USER: rostereditor
+      POSTGRES_DB: roster
