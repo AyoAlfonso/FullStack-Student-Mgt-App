@@ -22,8 +22,10 @@
   },
   "homepage": "https://github.com/Digication/ws-nodejs-re#readme",
   "dependencies": {
+    "@sendgrid/mail": "^6.2.1",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
+    "date-and-time": "^0.6.2",
     "debug": "~2.6.9",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",

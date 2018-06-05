@@ -24,8 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     unique : true,
    },
    status: {
-       type: DataTypes.ENUM('active', 'processing', 'failed'),
-       defaultValue:'processing',
+       type: DataTypes.ENUM('active', 'failed'),
+       defaultValue:'active',
      },
     createdAt: {
       type: DataTypes.DATE(3),

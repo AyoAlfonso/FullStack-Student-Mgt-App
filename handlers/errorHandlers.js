@@ -21,7 +21,7 @@ exports.developmentErrors = (err, req, res) => {
       'text/html': () => {
         res.render('error', errorDetails);
       }, // Form Submit, Reload the page
-      'application/json': () => res.json(errorDetails) // Ajax call, send JSON back
+      'application/json': () => res.json(errorDetails), // Ajax call, send JSON back
     });
   };
 
@@ -29,6 +29,6 @@ exports.developmentErrors = (err, req, res) => {
     res.status(err.status || 500);
     res.render('hello', {
       message: err.message,
-      error: {}
+      error: {},
     });
   };

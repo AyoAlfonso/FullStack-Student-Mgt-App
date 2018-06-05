@@ -4,13 +4,13 @@ require('dotenv').config();
 let ADMIN_PASS = process.env.ADMIN_PASS;
 
 exports.login = async (req, res) => {
-    let password = req.body.password.toLowerCase()
-        if (password !== ADMIN_PASS) {
-             return res.render('login', {
-                title: `NannyFix LogIn`,
-                message: `Wrong password!`
+let password = req.body.password.toLowerCase()
+     if (password !== ADMIN_PASS) {
+         return res.render('login', {
+            title: `NannyFix LogIn`,
+            message: `Wrong password!`,
             })
-        }
+    }
 
     let user = {
         password: req.body.password,
@@ -43,7 +43,7 @@ exports.isLoggedIn = async (req, res, next) => {
             if (err) {
                 res.render('login', {
                     title: `NannyFix Admin Board`,
-                    message: `${err.message}`
+                    message: `${err.message}`,
                 })
             } else if (authdata) {
                 next()

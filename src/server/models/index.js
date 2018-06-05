@@ -13,7 +13,7 @@ const db = {
 //Associations
 db.Users.hasMany(db.Enrollments);
 db.Enrollments.belongsTo(db.Users);
-
-
+db.Courses.hasMany(db.Enrollments);
+db.Enrollments.belongsTo(db.Courses);
 
 module.exports = db;
