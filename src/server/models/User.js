@@ -1,7 +1,7 @@
 let shortid = require('shortid-36');
 
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define("user", {
+  const User = sequelize.define("user", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -48,10 +48,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE(3),
       defaultValue: sequelize.literal('CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)'),
     },
-   }, {
-      tableName: 'user',
-      timestamps: true,
-      paranoid: true,
-      sync: { force: true },
-  })
+   },
+  //   {
+  //     tableName: 'user',
+  //     timestamps: true,
+  //     paranoid: true,
+  //     sync: { force: true },
+  // }
+)
+return User
 }

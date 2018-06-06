@@ -7,7 +7,7 @@ exports.login = async (req, res) => {
 let password = req.body.password.toLowerCase()
      if (password !== ADMIN_PASS) {
          return res.render('login', {
-            title: `NannyFix LogIn`,
+            title: `Digication LogIn`,
             message: `Wrong password!`,
             })
     }
@@ -17,7 +17,7 @@ let password = req.body.password.toLowerCase()
     }
     jwt.sign({
         user: user,
-    }, `nannyfixsecretkey`, (error, token) => {
+    }, `digicationsecretkey`, (error, token) => {
         let bearerHeader = `Bearer ${token}`
         req.session.token = bearerHeader
         res.redirect('/admin/home')
@@ -39,10 +39,10 @@ exports.isLoggedIn = async (req, res, next) => {
     if (bearerHeader !== undefined) {
         let bearer = bearerHeader.split(' ');
         let bearerToken = bearer[1];
-        jwt.verify(bearerToken, "nannyfixsecretkey", (err, authdata) => {
+        jwt.verify(bearerToken, "digicationsecretkey", (err, authdata) => {
             if (err) {
                 res.render('login', {
-                    title: `NannyFix Admin Board`,
+                    title: `Digication Admin Board`,
                     message: `${err.message}`,
                 })
             } else if (authdata) {

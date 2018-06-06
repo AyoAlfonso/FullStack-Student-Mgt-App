@@ -1,13 +1,19 @@
-const models = require('../src/server/models');
+const {getModels} = require('../src/server/models');
+const config = require('../db/config');
 let sendgridController = require('..//handlers/sendgrid');
+
+let models = getModels({
+    database: config.production.database, username: config.production.username, password:  config.production.password, options: config.production,
+});
 
 exports.removeEnrollment = async (req, res) =>{
   let user = res.user
   let course = res.course
+
 try {
 
   if (user && course) {
-       const deletedEnrollment = await models.Enrollments.destroy({
+       const deletedEnrollment = await models.enrollment.destroy({
           where: {studentId: req.body.userId, courseCode: req.body.courseCode},
        })
       if (deletedEnrollment == 1) {
@@ -39,7 +45,7 @@ exports.addEnrollment = async (req, res)=> {
 
 try {
     if (user && course) {
-      const enrollment = await models.Enrollments.create({
+      const enrollment = await models.enrollment.create({
           courseCode: req.body.courseCode,
           studentId: req.body.userId,
           email: req.body.email,

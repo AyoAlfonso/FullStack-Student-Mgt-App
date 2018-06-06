@@ -1,3 +1,4 @@
+'use strict'
 
 const express = require('express')
 
@@ -26,8 +27,8 @@ router.use('/', async function(req, res, next) {
      */
 
     if (req.body.userId){
-        let user = await models.Users.findOne( {
-         include: [ models.Enrollments],
+        let user = await models.Users.findOne({
+        //  include: [ models.Enrollments],
           where: {
             studentId: req.body.userId,
           },

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define("enrollment", {
+  const Enrollment = sequelize.define("enrollment", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -35,10 +35,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE(3),
       allowNull: true,
     },
-  }, {
-    tableName: 'enrollment',
-    timestamps: true,
-    paranoid: true,
-    sync: { force: true },
-  })
+  },
+  // {
+  //   tableName: 'enrollment',
+  //   timestamps: true,
+  //   paranoid: true,
+  //   sync: { force: true },
+  // }
+)
+return Enrollment
 }

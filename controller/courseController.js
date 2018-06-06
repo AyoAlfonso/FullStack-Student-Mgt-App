@@ -1,20 +1,29 @@
-const models = require('../src/server/models');
+
+const {getModels} = require('../src/server/models');
+
+const config = require('../db/config');
+
+let models = getModels({
+    database: config.production.database, username: config.production.username, password:  config.production.password, options: config.production,
+});
 
 exports.addCourse =  async (req, res)=> {
-  let lastName = req.body.lastName
-  let firstName = req.body.firstName
-  let email = req.body.email
+  let courseName = req.body.courseName
+  let courseCode = req.body.courseCode
+  let department = req.body.department
 
 try {
-  if (lastName&&firstName&&email){
-      const user = await  models.Users.create({
-          lastName: req.body.lastName,
-          firstName: req.body.firstName,
-          email: req.body.email,
+
+  if (courseName&&courseCode&&department){
+      const course = await  models.course.create({
+          lastName: courseName,
+          firstName: courseCode,
+          email: department,
        });
-      if (user) {
+
+      if (course) {
           return res.status(200).json({
-              message: `${user.firstName}'s Account has been created`,
+              message: `${course.id}'s Account has been created`,
               code: 200,
           })
       }

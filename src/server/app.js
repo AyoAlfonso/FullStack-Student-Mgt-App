@@ -1,9 +1,11 @@
+'use strict'
+
 const bodyParser = require('body-parser');
 const routes = require('../routes/index');
 const apiRoutes = require('../routes/api');
 const adminRoutes = require('../routes/admin');
 const cookieParser = require('cookie-parser');
-const errorHandlers = require('../../controller/errorHandlers');
+const errorHandlers = require('../../handlers/errorHandlers');
 const express = require('express');
 const logger = require('morgan');
 const middleware = require('../../middleware');
@@ -25,7 +27,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 /*Confirms Redirect http to https when we are in PRODUCTION*/
-app.use('*', function(req,res,next) {
+app.use('*', (req,res,next)=> {
   let status = 302;
 if(req.headers['x-forwarded-proto'] != 'https' && process.env.NODE_ENV === 'production') {
   res.redirect(status, 'https://' + req.hostname + req.originalUrl);
@@ -59,10 +61,15 @@ app.use('/api', apiRoutes);
 app.use('/admin', adminRoutes);
 app.use('/', routes);
 
+app.get('/*', (req, res) => {
+  res.render('error', {
+    title: "Not found",
+  })
+})
 
 app.set('port', (process.env.PORT || 4500));
 
-app.use(function (err, req, res, next) {
+app.use( (err, req, res, next)=> {
   next(err);
 });
 
@@ -79,7 +86,6 @@ const server = app.listen(app.get('port'), () => {
   console.log(`Our app is running -→ PORT ${app.get('port')}`)
 });
 
-/*Handle port errors server.on arrow function, on the callback of the server.on() method*/
 server.on('error', (error)=>{
  let port =  app.get('port')
     if (error.syscall !== 'listen') {

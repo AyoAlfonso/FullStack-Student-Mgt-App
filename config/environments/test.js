@@ -12,3 +12,4 @@ module.exports = {
     sync: { force: true },
   },
 };
+

@@ -1,11 +1,15 @@
-const models = require('../src/server/models');
+const {getModels} = require('../src/server/models');
+const config = require('../db/config');
 let sendgridController = require('../handlers/sendgrid');
+
+let models = getModels({
+    database: config.production.database, username: config.production.username, password:  config.production.password, options: config.production,
+});
 
 exports.findUserEnrollment = async (req, res) => {
   let user = req.user;
   try {
-
-      let enrollment = await models.User.findOne({
+      let enrollment = await models.user.findOne({
           where: {studentId: req.body.userId, courseCode: req.body.courseCode},
       })
 
@@ -32,7 +36,7 @@ exports.findUserEnrollment = async (req, res) => {
 
   try {
          if (req.params.courseCode) {
-             let user = await models.User.findOne({ studentId: req.body.userId})
+             let user = await models.user.findOne({ studentId: req.body.userId})
              if (!user){
                  return res.status(404).json({
                      message: `This user does not exist`,
@@ -40,7 +44,7 @@ exports.findUserEnrollment = async (req, res) => {
                  })
               }
  
-             let course =  models.Courses.findOne({courseCode: req.params.courseCode})
+             let course =  models.course.findOne({courseCode: req.params.courseCode})
              if (!course) {
                  return res.status(404).json({
                      message: `This Course does not exist`,
@@ -50,7 +54,7 @@ exports.findUserEnrollment = async (req, res) => {
              let userData = {
                      facultyStatus: req.params.courseCode,
                    };
-             const updatedUser = await models.User.update(userData,
+             const updatedUser = await models.user.update(userData,
                  { where:
                      {
                         studentId: req.body.userId,
@@ -89,7 +93,7 @@ exports.findUserEnrollment = async (req, res) => {
     }
 
     try {
-        const user = await models.User.destroy({
+        const user = await models.user.destroy({
             where: {
                 email: req.body.email,
             },
@@ -114,7 +118,6 @@ exports.findUserEnrollment = async (req, res) => {
      }
   }
 
-
   exports.addUser =  async (req, res) =>{
     let lastName = req.body.lastName
     let firstName = req.body.firstName
@@ -122,11 +125,12 @@ exports.findUserEnrollment = async (req, res) => {
 
     try {
         if (lastName&&firstName&&email){
-            const user = await  models.Users.create({
+            const user = await models.user.create({
                 lastName: req.body.lastName,
                 firstName: req.body.firstName,
                 email: req.body.email,
             });
+
             if (user) {
                 return res.status(200).json({
                     message: `${user.firstName}'s Account has been created`,
@@ -141,7 +145,7 @@ exports.findUserEnrollment = async (req, res) => {
 
       } catch (error) {
       return res.status(500).json({
-          message: `An error occured and information couldn't be retrieved ${error.message}`,
+          message: `An error occured and information couldn't be retrieved ${error}`,
           code: 500,
       })
     }

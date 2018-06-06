@@ -1,19 +1,45 @@
-const config = require('../../../config');
-const path = require('path');
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize(config.connection.host, null, null, config);
-const db = {
-  Users: sequelize.import(path.join(__dirname, 'User.js')),
-  Enrollments: sequelize.import(path.join(__dirname, 'Enrollment.js')),
-  Courses: sequelize.import(path.join(__dirname, 'Course.js')),
-  sequelize: sequelize,
+let models = {};
+
+function getModels (config, force = false) {
+  if (Object.keys(models).length && !force) {
+    return models;
+  }
+
+  const sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config.options
+  );
+
+  let modules = [
+    require('./User'),
+    require('./Course'),
+    require('./Enrollment'),
+  ]
+
+  // Initialize models
+  modules.forEach((module) => {
+    const model = module(sequelize, Sequelize, config);
+    models[model.name] = model;
+  });
+
+  // Apply associations
+  Object.keys(models).forEach((key) => {
+    if ('associate' in models[key]) {
+      models[key].associate(models);
+    }
+  });
+
+  models.sequelize = sequelize;
+  models.Sequelize = Sequelize;
+
+
+  return models;
+}
+
+module.exports = {
+  getModels,
 };
-
-//Associations
-db.Users.hasMany(db.Enrollments);
-db.Enrollments.belongsTo(db.Users);
-db.Courses.hasMany(db.Enrollments);
-db.Enrollments.belongsTo(db.Courses);
-
-module.exports = db;

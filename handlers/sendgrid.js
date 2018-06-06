@@ -1,19 +1,22 @@
+'use strict'
 const sgMail = require('@sendgrid/mail');
 
-sgMail.setApiKey(process.env.sendgrid.API_KEY);
-let MAIN_URL = process.env.config.SITE_URL;
-let API_URL = process.env.config.API_URL;
+require('dotenv').config();
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+let MAIN_URL = process.env.CONFIG_SITE_URL;
+let API_URL = process.env.CONFIG_API_URL;
 
 module.exports = {
-    sendWelcomeEmail: async function(studentEmail, studentName , newStudentCode) {
+    sendWelcomeEmail: async (studentEmail, studentName , newStudentCode) =>{
 
         let senderEmail = {
             "email": "no-reply@digication.com",
-            "name": "in",
+            "name": "Digication",
         }
 
         let msg = {
-            reply_to: `no_reply@digication.com`,
+            reply_to: senderEmail,
             to: studentEmail,
             from: `no_reply@digication.com` ,
             subject: `You have been accpeted into your desired course!  `,
@@ -21,15 +24,15 @@ module.exports = {
             substitutions: {
                 name: studentName,
                 studtentAcceptanceCodeLink: `${MAIN_URL}/accept/${newStudentCode}`,
-                newStudentCode: ,
-                trackingURL: `${API_URL}/imgTracking/nannyfix-logo/${newUserReferralCode}/12b7ec45-c144-4885-b7f3`,
+                StudentCode: newStudentCode,
+                trackingURL: `${API_URL}/imgTracking/nannyfix-logo/${newStudentCode}/12b7ec45-c144-4885-b7f3`,
             },
         };
 
         try {
             await sgMail.send(msg)
         } catch (error) {
-                console.log(error.message)
+            console.log(error.message)
         }
     },
 }
