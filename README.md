@@ -2,6 +2,9 @@
 
 The project how-to's, style guidelines and best practices for the engineering team.
 
+Updated version of this ReadMe: https://www.notion.so/vayniac/Node-Student-Course-Project-Documentation-e0356f071bf14ec9a2ad7ae4ae13df23
+
+
 # Javascript Styles
 
 ---
