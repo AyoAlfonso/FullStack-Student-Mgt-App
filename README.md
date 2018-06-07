@@ -136,8 +136,6 @@ Setting up the public folder to keep CSS & JS resources
 
 For the database ORM and SQL query builder I continued with Sequelize. It has a shorter learning curve, every developer on the team can easily pick the technology up.  
 
-    app.use(express.static('public'))
-
 **For Error Handling:**
 
 I am suggesting that we do not need this module 
